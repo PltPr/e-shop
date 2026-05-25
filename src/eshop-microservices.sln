@@ -18,6 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{5E105409-C6E9-4B15-AE60-93F52C75C113}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.API", "Services\Basket\Basket.API\Basket.API.csproj", "{A13D8CD3-E319-4FD4-92E9-19A797AF435F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB5BD479-E2F4-4E38-BD2D-0FAD5FCB89D4} = {BB5BD479-E2F4-4E38-BD2D-0FAD5FCB89D4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
