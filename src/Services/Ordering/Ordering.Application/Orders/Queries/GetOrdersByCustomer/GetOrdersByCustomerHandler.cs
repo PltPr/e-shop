@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ordering.Application.Orders.Queries.GetOrdersByCustomer
+﻿namespace Ordering.Application.Orders.Queries.GetOrdersByCustomer
 {
-	internal class GetOrdersByCustomerHandler
+	public class GetOrdersByCustomerHandler (IApplicationDbContext dbContext)
+		: IQueryHandler<GetOrdersByCustomerQuery, GetOrdersByCustomerResult>
 	{
+		public async Task<GetOrdersByCustomerResult> Handle(GetOrdersByCustomerQuery query, CancellationToken cancellationToken)
+		{
+			var orders = await dbContext.Orders
+				.Include(x => x.OrderItems)
+				.AsNoTracking()
+				.Where(x => x.CustomerId == CustomerId.Of(query.CustomerId))
+				.OrderBy(x => x.OrderName)
+				.ToListAsync();
+
+			return new GetOrdersByCustomerResult(orders.ToOrderDtoList());
+		}
 	}
 }
+
